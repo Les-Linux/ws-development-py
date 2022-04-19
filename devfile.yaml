@@ -1,9 +1,11 @@
+eclipse che +  volume mount remote-endpoint belonging to the container component tools + volume mount plugins belonging to the container component tools
+
 schemaVersion: 2.1.0
 metadata:
   name: python-hello-world
-  namespace: leslie-fleming-che-ft209u
+  namespace: ws-development-py
 projects:
-  - name: python-hello-world
+  - name: ws-development-py
     zip:
       location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/python-hello-world.zip'
 components: []
