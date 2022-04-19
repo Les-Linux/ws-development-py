@@ -1,9 +1,7 @@
-eclipse che +  volume mount remote-endpoint belonging to the container component tools + volume mount plugins belonging to the container component tools
-
 schemaVersion: 2.1.0
 metadata:
-  name: python-hello-world
-  namespace: ws-development-py
+  name: ws-development-py
+  namespace: leslie-fleming-che-ft209u
 projects:
   - name: ws-development-py
     zip:
