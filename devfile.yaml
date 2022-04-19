@@ -1,0 +1,53 @@
+schemaVersion: 2.1.0
+metadata:
+  name: ws-development-py
+  namespace: leslie-fleming-che-ft209u
+projects:
+  - name: ws-development-py
+    zip:
+      location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/python-hello-world.zip'
+components:
+  - attributes:
+      app.kubernetes.io/name: tools
+      che-theia.eclipse.org/vscode-extensions:
+        - 'https://github.com/microsoft/vscode-python/releases/download/2020.7.94776/ms-python-release.vsix'
+    container:
+      args:
+        - sh
+        - '-c'
+        - '${PLUGIN_REMOTE_ENDPOINT_EXECUTABLE}'
+      env:
+        - name: PLUGIN_REMOTE_ENDPOINT_EXECUTABLE
+          value: /remote-endpoint/plugin-remote-endpoint
+        - name: THEIA_PLUGINS
+          value: 'local-dir:///plugins/sidecars/tools'
+        - name: CHE_DASHBOARD_URL
+          value: 'https://che-openshift-operators.apps.k8s.corp.elbicon.com'
+        - name: CHE_PLUGIN_REGISTRY_URL
+          value: 'https://che-openshift-operators.apps.k8s.corp.elbicon.com/plugin-registry/v3'
+        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
+          value: 'http://plugin-registry.openshift-operators.svc:8080/v3'
+      image: 'quay.io/devfile/universal-developer-image:ubi8-0e189d9'
+      memoryLimit: 1024Mi
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: venv
+          path: /home/user/.venv
+        - name: remote-endpoint
+          path: /remote-endpoint
+        - name: plugins
+          path: /plugins
+    name: tools
+  - name: venv
+    volume:
+      size: 1G
+commands:
+  - exec:
+      commandLine: python3 hello-world.py
+      component: tools
+      group:
+        kind: run
+      label: Run application
+      workingDir: '${PROJECT_SOURCE}'
+    id: run-application
