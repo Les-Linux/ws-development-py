@@ -1,6 +1,6 @@
 schemaVersion: 2.1.0
 metadata:
-  name: python-hello-world
+  name: ws-development-py
 components:
   - name: tools
     container:
