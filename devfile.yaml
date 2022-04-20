@@ -1,8 +1,13 @@
 schemaVersion: 2.1.0
 metadata:
   name: ws-development-py
-components:
-  - name: tools
+  namespace: leslie-fleming-che-ft209u
+projects:
+  - name: python-hello-world
+    zip:
+      location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/python-hello-world.zip'
+components: 
+    - name: tools
     container:
       image: quay.io/devfile/universal-developer-image:ubi8-0e189d9
       volumeMounts:
@@ -10,17 +15,12 @@ components:
           path: /home/user/.venv
       memoryLimit: 1024Mi
       mountSources: true
-
-  - name: venv
-    volume:
-      size: 1G
-
 commands:
-  - id: run-application
-    exec:
-      label: "Run application"
+  - exec:
+      commandLine: python3 hello-world.py
       component: tools
-      workingDir: ${PROJECT_SOURCE}
-      commandLine: "python3 hello-world.py"
       group:
         kind: run
+      label: Run application
+      workingDir: '${PROJECT_SOURCE}'
+    id: run-application
