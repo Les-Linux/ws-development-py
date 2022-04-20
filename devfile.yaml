@@ -3,7 +3,7 @@ metadata:
   name: ws-development-py
   namespace: leslie-fleming-che-ft209u
 projects:
-  - name: python-hello-world
+  - name: ws-development-py
     zip:
       location: 'http://devfile-registry.openshift-operators.svc:8080/resources/v2/python-hello-world.zip'
 components:
